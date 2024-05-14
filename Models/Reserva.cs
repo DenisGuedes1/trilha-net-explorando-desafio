@@ -17,7 +17,7 @@ namespace DesafioProjetoHospedagem.Models
         {
             // TODO: Verificar se a capacidade é maior ou igual ao número de hóspedes sendo recebido
             // *IMPLEMENTE AQUI*
-            if (true)
+            if (Suite.Capacidade >= hospedes.Count)
             {
                 Hospedes = hospedes;
             }
@@ -25,6 +25,7 @@ namespace DesafioProjetoHospedagem.Models
             {
                 // TODO: Retornar uma exception caso a capacidade seja menor que o número de hóspedes recebido
                 // *IMPLEMENTE AQUI*
+                throw new Exception("Capacidade excedida. Não é possível cadastrar todos os hóspedes.");
             }
         }
 
@@ -37,24 +38,35 @@ namespace DesafioProjetoHospedagem.Models
         {
             // TODO: Retorna a quantidade de hóspedes (propriedade Hospedes)
             // *IMPLEMENTE AQUI*
-            return 0;
+            return Hospedes != null ? Hospedes.Count : 0;
         }
+        
 
-        public decimal CalcularValorDiaria()
+        public decimal CalcularValorDiaria(Suite suite)
         {
+            Suite = suite;
             // TODO: Retorna o valor da diária
+            // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
             // Cálculo: DiasReservados X Suite.ValorDiaria
             // *IMPLEMENTE AQUI*
-            decimal valor = 0;
-
-            // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
-            // *IMPLEMENTE AQUI*
-            if (true)
+            if (Suite != null && DiasReservados > 0)
             {
-                valor = 0;
+                decimal valor;
+                decimal valorTotal = DiasReservados * Suite.ValorDiaria;
+                if (DiasReservados >= 10)
+                {
+                    decimal desconto = valorTotal * 0.10m;
+                    valor = valorTotal - desconto;
+                }
+                else{
+                    valor = valorTotal;
+                }
+                return valor;
             }
-
-            return valor;
+            else
+            {
+                throw new Exception("Suite não definida ou dias reservados inválidos.");
+            }
         }
     }
 }
