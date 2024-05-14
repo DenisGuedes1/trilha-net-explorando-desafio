@@ -25,7 +25,7 @@ namespace DesafioProjetoHospedagem.Models
             {
                 // TODO: Retornar uma exception caso a capacidade seja menor que o número de hóspedes recebido
                 // *IMPLEMENTE AQUI*
-                throw new Exception("Capacidade excedida. Não é possível cadastrar todos os hóspedes.");
+                throw new Exception($"Não é possível cadastrar todos os hóspedes. Essa suite suporte apenas {Suite.Capacidade} hospedes.");
             }
         }
 
